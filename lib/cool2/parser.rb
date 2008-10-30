@@ -23,23 +23,5 @@ module Cool2
       tree
     end
     
-    def clean!
-      return unless @tree.content.respond_to? :each
-      
-      last_text = nil
-      result = Array.new
-      @tree.content.each do |child|
-        if last_text 
-          child.class == Tree::Text
-          last_text.content += "\n#{child.content}"
-        else
-          result << child
-          last_text = child.class == Tree::Text ? child : nil
-        end
-      end
-      @tree.content = result
-      @tree
-    end
-
   end
 end

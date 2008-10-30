@@ -1,4 +1,5 @@
-require 'cool2'
+require 'lib/cool2'
+require 'cool2/latex'
 
 def whole_document(list) 
   <<-eos
@@ -15,7 +16,7 @@ end
 
 
 test = <<-eos
-- Security (Absichern gegen böse Absichten)
+= Security (Absichern gegen böse Absichten) =
   - Ärzte melden sich nicht ordnungsgemäß vom Terminal im Patientenzimmer ab
     - Besucher können während der Patient nicht im Zimmer ist, oder während   
       dieser schläft/nicht ansprechbar ist, die Akte des Patienten auslesen und
@@ -60,10 +61,8 @@ test = <<-eos
     Bestechung, Gewalt...) werden um so Daten der Patientenakte herauszugeben 
     (Datenschutz)
 eos
-parser = Parser.new(test.split("\n"))
-latex = parser.parse
-puts latex
+latex = Cool2::Latex.parse(test)
 
-File.open('/Users/walski/Desktop/test.tex', 'w') do |file|
-  file.puts whole_document(latex)
+File.open('/Users/walski/Desktop/test/test.tex', 'w') do |file|
+   file.puts whole_document(latex)
 end
