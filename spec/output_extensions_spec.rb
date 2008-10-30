@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
+require 'cool2/paragraphizer'
 include Cool2::Tree
 
 describe "Cool2::Paragraphizer" do

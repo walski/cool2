@@ -1,23 +1,10 @@
 require 'lib/cool2'
-require 'cool2/latex'
-
-def whole_document(list) 
-  <<-eos
-  \\documentclass{article}
-  \\usepackage[utf8]{inputenc}
-  \\usepackage[T1]{fontenc}
-
-  \\title{Test Document}
-  \\begin{document}
-    #{list}
-  \\end{document}
-  eos
-end
+require 'cool2/formats/html'
 
 
 test = <<-eos
 = Security (Absichern gegen böse Absichten) =
-  - Ärzte melden sich nicht ordnungsgemäß vom Terminal im Patientenzimmer ab
+  - Ärzte <b>melden</b> sich nicht ordnungsgemäß vom Terminal im Patientenzimmer ab
     - Besucher können während der Patient nicht im Zimmer ist, oder während   
       dieser schläft/nicht ansprechbar ist, die Akte des Patienten auslesen und
       ändern. (Datenschutz / Authenzität)
@@ -61,8 +48,8 @@ test = <<-eos
     Bestechung, Gewalt...) werden um so Daten der Patientenakte herauszugeben 
     (Datenschutz)
 eos
-latex = Cool2::Latex.parse(test)
-
-File.open('/Users/walski/Desktop/test/test.tex', 'w') do |file|
-   file.puts whole_document(latex)
+latex = Cool2::HTML.parse(test, :title => 'IT Sicherheit')
+puts latex
+File.open('/Users/walski/Desktop/test/test.html', 'w') do |file|
+   file.puts latex
 end
